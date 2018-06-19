@@ -43,6 +43,7 @@ namespace SolarWinds.MSP.Chess
             else
             {
                 // TODO: Implement in future
+                throw new NotImplementedException();
             }
         }
 

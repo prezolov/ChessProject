@@ -17,12 +17,12 @@ namespace SolarWinds.MSP.Chess
             pieces = new Pawn[MaxBoardWidth, MaxBoardHeight];
         }
 
-        public void Add(Piece piece, int xCoordinate, int yCoordinate, PieceColor pieceColor)
+        public void Add(Piece piece, int xCoordinate, int yCoordinate)
         {
             
             // Avoid adding too many pieces and avoid illegal positions
-            if (pieceColor == PieceColor.Black && GetBoardInfo(piece.GetType().Name, PieceColor.Black) >= piece.PieceLimit ||
-                pieceColor == PieceColor.White && GetBoardInfo(piece.GetType().Name, PieceColor.White) >= piece.PieceLimit ||
+            if (piece.PieceColor == PieceColor.Black && GetBoardInfo(piece.GetType().Name, PieceColor.Black) >= piece.PieceLimit ||
+                piece.PieceColor == PieceColor.White && GetBoardInfo(piece.GetType().Name, PieceColor.White) >= piece.PieceLimit ||
                 !IsLegalBoardPosition(xCoordinate,yCoordinate))
             {
                 // Set pawn coordinates outside of chessboard
@@ -37,7 +37,7 @@ namespace SolarWinds.MSP.Chess
             // Add to chessboard
             pieces[xCoordinate, yCoordinate] = piece;
             // Increment number of pieces
-            UpdateBoardInfo(piece.GetType().Name, pieceColor);
+            UpdateBoardInfo(piece.GetType().Name, piece.PieceColor);
         }
         /// <summary>
         /// Returns the number of pieces of the specified type and color that are on the board.

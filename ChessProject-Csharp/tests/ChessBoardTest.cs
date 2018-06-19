@@ -83,8 +83,8 @@ namespace SolarWinds.MSP.Chess
 		{
 			Pawn firstPawn = new Pawn(PieceColor.Black);
 			Pawn secondPawn = new Pawn(PieceColor.Black);
-			chessBoard.Add(firstPawn, 6, 3, PieceColor.Black);
-			chessBoard.Add(secondPawn, 6, 3, PieceColor.Black);
+			chessBoard.Add(firstPawn, 6, 3);
+			chessBoard.Add(secondPawn, 6, 3);
 			Assert.AreEqual(firstPawn.XCoordinate, 6);
             Assert.AreEqual(firstPawn.YCoordinate, 3);
             Assert.AreEqual(secondPawn.XCoordinate, -1);
@@ -98,7 +98,7 @@ namespace SolarWinds.MSP.Chess
 			{
 				Pawn pawn = new Pawn(PieceColor.Black);
 				int row = i / ChessBoard.MaxBoardWidth;
-				chessBoard.Add(pawn, 6 + row, i % ChessBoard.MaxBoardWidth, PieceColor.Black);
+				chessBoard.Add(pawn, 6 + row, i % ChessBoard.MaxBoardWidth);
 				if (row < 1)
 				{
 					Assert.AreEqual(pawn.XCoordinate, (6 + row));
@@ -120,16 +120,16 @@ namespace SolarWinds.MSP.Chess
             // Add 2 black pawns
             Pawn firstPawnBlack = new Pawn(PieceColor.Black);
             Pawn secondPawnBlack = new Pawn(PieceColor.Black);
-            chessBoard.Add(firstPawnBlack, 6, 3, PieceColor.Black);
-            chessBoard.Add(secondPawnBlack, 5, 3, PieceColor.Black);
+            chessBoard.Add(firstPawnBlack, 6, 3);
+            chessBoard.Add(secondPawnBlack, 5, 3);
 
             // Add 3 white pawns
             Pawn firstPawnWhite = new Pawn(PieceColor.White);
             Pawn secondPawnWhite = new Pawn(PieceColor.White);
             Pawn thirdPawnWhite = new Pawn(PieceColor.White);
-            chessBoard.Add(firstPawnWhite, 6, 0, PieceColor.White);
-            chessBoard.Add(secondPawnWhite, 5, 0, PieceColor.White);
-            chessBoard.Add(thirdPawnWhite, 4, 0, PieceColor.White);
+            chessBoard.Add(firstPawnWhite, 6, 0);
+            chessBoard.Add(secondPawnWhite, 5, 0);
+            chessBoard.Add(thirdPawnWhite, 4, 0);
 
             // Assert
             Assert.AreEqual(chessBoard.GetBoardInfo(firstPawnBlack.GetType().Name, PieceColor.Black), 2);
