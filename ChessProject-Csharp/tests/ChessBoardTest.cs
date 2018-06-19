@@ -16,47 +16,61 @@ namespace SolarWinds.MSP.Chess
 		{
 			chessBoard = new ChessBoard();
 		}
-
+        /// <summary>
+        /// Makes sure the chessboard has a maximum width of 7.
+        /// </summary>
         [TestMethod]
 		public void Has_MaxBoardWidth_of_7()
 		{
 			Assert.AreEqual(ChessBoard.MaxBoardWidth, 7);
 		}
-
+        /// <summary>
+        /// Makes sure the chessboard has a maximum height of 7.
+        /// </summary>
         [TestMethod]
 		public void Has_MaxBoardHeight_of_7()
 		{
 			Assert.AreEqual(ChessBoard.MaxBoardHeight, 7);
 		}
-
+        /// <summary>
+        /// Makes sure a coordinate of (0, 0) is considered a legal board position.
+        /// </summary>
         [TestMethod]
 		public void IsLegalBoardPosition_True_X_equals_0_Y_equals_0()
 		{
 			var isValidPosition = chessBoard.IsLegalBoardPosition(0, 0);
 			Assert.IsTrue(isValidPosition);
 		}
-
+        /// <summary>
+        /// Makes sure a coordinate of (5, 5) is considered a legal board position.
+        /// </summary>
         [TestMethod]
 		public void IsLegalBoardPosition_True_X_equals_5_Y_equals_5()
 		{
 			var isValidPosition = chessBoard.IsLegalBoardPosition(5, 5);
             Assert.IsTrue(isValidPosition);
 		}
-
+        /// <summary>
+        /// Makes sure a coordinate of (11, 5) is considered an illegal board position.
+        /// </summary>
         [TestMethod]
 		public void IsLegalBoardPosition_False_X_equals_11_Y_equals_5()
 		{
 			var isValidPosition = chessBoard.IsLegalBoardPosition(11, 5);
             Assert.IsFalse(isValidPosition);
 		}
-
+        /// <summary>
+        /// Makes sure a coordinate of (0, 9) is considered an illegal board position.
+        /// </summary>
         [TestMethod]
 		public void IsLegalBoardPosition_False_X_equals_0_Y_equals_9()
 		{
 			var isValidPosition = chessBoard.IsLegalBoardPosition(0, 9);
             Assert.IsFalse(isValidPosition);
 		}
-
+        /// <summary>
+        /// Makes sure a coordinate of (11, 0) is considered an illegal board position.
+        /// </summary>
         [TestMethod]
 		public void IsLegalBoardPosition_False_X_equals_11_Y_equals_0()
 		{
@@ -64,20 +78,27 @@ namespace SolarWinds.MSP.Chess
             Assert.IsFalse(isValidPosition);
 		}
 
+        /// <summary>
+        /// Makes sure a negative X coordinate is considered an illegal board position.
+        /// </summary>
         [TestMethod]
 		public void IsLegalBoardPosition_False_For_Negative_X_Values()
 		{
 			var isValidPosition = chessBoard.IsLegalBoardPosition(-1, 5);
             Assert.IsFalse(isValidPosition);
 		}
-
+        /// <summary>
+        /// Makes sure a negative Y coordinate is considered an illegal board position.
+        /// </summary>
         [TestMethod]
 		public void IsLegalBoardPosition_False_For_Negative_Y_Values()
 		{
 			var isValidPosition = chessBoard.IsLegalBoardPosition(5, -1);
             Assert.IsFalse(isValidPosition);
 		}
-
+        /// <summary>
+        /// Makes sure that two pawns are not placed on top of each other.
+        /// </summary>
         [TestMethod]
 		public void Avoids_Duplicate_Positioning()
 		{
@@ -90,7 +111,9 @@ namespace SolarWinds.MSP.Chess
             Assert.AreEqual(secondPawn.XCoordinate, -1);
             Assert.AreEqual(secondPawn.YCoordinate, -1);
 		}
-
+        /// <summary>
+        /// Makes sure the add method limits the number of pawns allowed on the board.
+        /// </summary>
         [TestMethod]
 		public void Limits_The_Number_Of_Pawns()
 		{
@@ -112,7 +135,7 @@ namespace SolarWinds.MSP.Chess
 			}
 		}
         /// <summary>
-        /// This test checks if the board maintains track of the pieces in the board properly. 
+        /// Makes sure that piece tracking is operating properly. 
         /// </summary>
         [TestMethod]
         public void Has_Correct_Board_Info()
@@ -131,7 +154,7 @@ namespace SolarWinds.MSP.Chess
             chessBoard.Add(secondPawnWhite, 5, 0);
             chessBoard.Add(thirdPawnWhite, 4, 0);
 
-            // Assert
+            // Assert (should be 2 black pawns and 3 white pawns)
             Assert.AreEqual(chessBoard.GetBoardInfo(firstPawnBlack.GetType().Name, PieceColor.Black), 2);
             Assert.AreEqual(chessBoard.GetBoardInfo(firstPawnBlack.GetType().Name, PieceColor.White), 3);
         }

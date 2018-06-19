@@ -18,22 +18,28 @@ namespace SolarWinds.MSP.Chess
 			chessBoard = new ChessBoard();
 			pawn = new Pawn(PieceColor.Black);
 		}
-
-		[TestMethod]
+        /// <summary>
+        /// Makes sure the add method sets the x coordinate of a pawn.
+        /// </summary>
+        [TestMethod]
 		public void ChessBoard_Add_Sets_XCoordinate()
 		{
 			chessBoard.Add(pawn, 6, 3);
 			Assert.AreEqual(pawn.XCoordinate, 6);
 		}
-
-		[TestMethod]
+        /// <summary>
+        /// Makes sure the add method sets the y coordinate of a pawn.
+        /// </summary>
+        [TestMethod]
 		public void ChessBoard_Add_Sets_YCoordinate()
 		{
 			chessBoard.Add(pawn, 6, 3);
 			Assert.AreEqual(pawn.YCoordinate, 3);
 		}
-
-		[TestMethod]
+        /// <summary>
+        /// Makes sure pawns aren't allowed to move to the right.
+        /// </summary>
+        [TestMethod]
 		public void Pawn_Move_IllegalCoordinates_Right_DoesNotMove()
 		{
 			chessBoard.Add(pawn, 6, 3);
@@ -41,8 +47,10 @@ namespace SolarWinds.MSP.Chess
             Assert.AreEqual(pawn.XCoordinate, 6);
             Assert.AreEqual(pawn.YCoordinate, 3);
 		}
-
-		[TestMethod]
+        /// <summary>
+        /// Makes sure pawns aren't allowed to move to the left.
+        /// </summary>
+        [TestMethod]
 		public void Pawn_Move_IllegalCoordinates_Left_DoesNotMove()
 		{
 			chessBoard.Add(pawn, 6, 3);
@@ -50,7 +58,9 @@ namespace SolarWinds.MSP.Chess
             Assert.AreEqual(pawn.XCoordinate, 6);
             Assert.AreEqual(pawn.YCoordinate, 3);
 		}
-
+        /// <summary>
+        /// Makes sure pawns aren't allowed to move backward.
+        /// </summary>
         [TestMethod]
         public void Pawn_Move_IllegalCoordinates_Backward_DoesNotMove()
         {
@@ -68,7 +78,9 @@ namespace SolarWinds.MSP.Chess
             Assert.AreEqual(blackPawn.XCoordinate, 6);
             Assert.AreEqual(blackPawn.YCoordinate, 4);
         }
-
+        /// <summary>
+        /// Makes sure pawns are allowed to move forward
+        /// </summary>
         [TestMethod]
 		public void Pawn_Move_LegalCoordinates_Forward_UpdatesCoordinates()
 		{
