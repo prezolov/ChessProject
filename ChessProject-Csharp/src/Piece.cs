@@ -12,7 +12,6 @@ namespace SolarWinds.MSP.Chess
     /// </summary>
     public abstract class Piece
     {
-        protected ChessBoard chessBoard;
         /// <summary>
         /// The x coordinate.
         /// </summary>
@@ -29,12 +28,6 @@ namespace SolarWinds.MSP.Chess
         /// The maximum number of pieces of the specified type allowed.
         /// </summary>
         protected int pieceLimit;
-
-        public ChessBoard ChessBoard
-        {
-            get { return chessBoard; }
-            set { chessBoard = value; }
-        }
 
         public int XCoordinate
         {
@@ -65,6 +58,9 @@ namespace SolarWinds.MSP.Chess
             set { pieceLimit = value; }
         }
 
+        /// <summary>
+        /// Moves a piece around the board, if possible.
+        /// </summary>
         public abstract void Move(MovementType movementType, int newX, int newY);
 
     }
