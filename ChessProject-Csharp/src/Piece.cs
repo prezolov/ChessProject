@@ -25,6 +25,10 @@ namespace SolarWinds.MSP.Chess
         /// The color of the chess piece, can be either black or white.
         /// </summary>
         protected PieceColor pieceColor;
+        /// <summary>
+        /// The maximum number of pieces of the specified type allowed.
+        /// </summary>
+        protected int pieceLimit;
 
         public ChessBoard ChessBoard
         {
@@ -53,6 +57,12 @@ namespace SolarWinds.MSP.Chess
         protected Piece(PieceColor pieceColor)
         {
             this.pieceColor = pieceColor;
+        }
+
+        public int PieceLimit
+        {
+            get { return pieceLimit; }
+            set { pieceLimit = value; }
         }
 
         public abstract void Move(MovementType movementType, int newX, int newY);

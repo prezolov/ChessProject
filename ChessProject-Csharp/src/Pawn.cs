@@ -7,7 +7,10 @@ namespace SolarWinds.MSP.Chess
     /// </summary>
     public class Pawn : Piece
     {
-        public Pawn(PieceColor pieceColor) : base(pieceColor) { }
+        public Pawn(PieceColor pieceColor) : base(pieceColor)
+        {
+            pieceLimit = ChessBoard.MaxBoardWidth;
+        }
         /// <summary>
         /// Used to move a pawn around the chessboard, can also be used to capture other chess pieces.
         /// </summary>

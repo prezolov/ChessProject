@@ -6,7 +6,10 @@ namespace SolarWinds.MSP.Chess
     {
         public static readonly int MaxBoardWidth = 7;
         public static readonly int MaxBoardHeight = 7;
-        public Dictionary<PieceType, PieceInfo> boardInfo = new Dictionary<PieceType, PieceInfo>();
+        /// <summary>
+        /// Used to keep track of the number of pieces placed on the board.
+        /// </summary>
+        public Dictionary<string, PieceInfo> boardInfo = new Dictionary<string, PieceInfo>();
         private Piece[,] pieces;
 
         public ChessBoard()
@@ -14,34 +17,35 @@ namespace SolarWinds.MSP.Chess
             pieces = new Pawn[MaxBoardWidth, MaxBoardHeight];
         }
 
-        public void Add(Pawn pawn, int xCoordinate, int yCoordinate, PieceColor pieceColor)
+        public void Add(Piece piece, int xCoordinate, int yCoordinate, PieceColor pieceColor)
         {
+            
             // Avoid adding too many pieces and avoid illegal positions
-            if (pieceColor == PieceColor.Black && GetBoardInfo(PieceType.Pawn, PieceColor.Black) >= MaxBoardWidth ||
-                pieceColor == PieceColor.White && GetBoardInfo(PieceType.Pawn, PieceColor.White) >= MaxBoardWidth ||
+            if (pieceColor == PieceColor.Black && GetBoardInfo(piece.GetType().Name, PieceColor.Black) >= piece.PieceLimit ||
+                pieceColor == PieceColor.White && GetBoardInfo(piece.GetType().Name, PieceColor.White) >= piece.PieceLimit ||
                 !IsLegalBoardPosition(xCoordinate,yCoordinate))
             {
                 // Set pawn coordinates outside of chessboard
-                pawn.XCoordinate = -1;
-                pawn.YCoordinate = -1;
+                piece.XCoordinate = -1;
+                piece.YCoordinate = -1;
 
                 return;
             }
             // Assign coordinates to piece
-            pawn.XCoordinate = xCoordinate;
-            pawn.YCoordinate = yCoordinate;
+            piece.XCoordinate = xCoordinate;
+            piece.YCoordinate = yCoordinate;
             // Add to chessboard
-            pieces[xCoordinate, yCoordinate] = pawn;
+            pieces[xCoordinate, yCoordinate] = piece;
             // Increment number of pieces
-            UpdateBoardInfo(PieceType.Pawn, pieceColor);
+            UpdateBoardInfo(piece.GetType().Name, pieceColor);
         }
         /// <summary>
         /// Returns the number of pieces of the specified type and color that are on the board.
         /// </summary>
-        public int GetBoardInfo(PieceType pieceType, PieceColor pieceColor)
+        public int GetBoardInfo(string piece, PieceColor pieceColor)
         {
             PieceInfo pieceInfo = new PieceInfo(0, 0);
-            if (boardInfo.TryGetValue(pieceType, out pieceInfo))
+            if (boardInfo.TryGetValue(piece, out pieceInfo))
             {
                 switch (pieceColor)
                 {
@@ -50,6 +54,7 @@ namespace SolarWinds.MSP.Chess
                     case PieceColor.White:
                         return pieceInfo.white;
                     default:
+                        // Should never run
                         break;
                 }
             }
@@ -58,28 +63,28 @@ namespace SolarWinds.MSP.Chess
         /// <summary>
         /// Updates the number of pieces of the specified type and color that are on the board.
         /// </summary>
-        public void UpdateBoardInfo(PieceType pieceType, PieceColor pieceColor)
+        public void UpdateBoardInfo(string piece, PieceColor pieceColor)
         {
             PieceInfo pieceInfo = new PieceInfo(0, 0);
             switch (pieceColor)
             {
                 case PieceColor.Black:
                     // Increment the number of black pieces of the current piece type
-                    if (boardInfo.TryGetValue(pieceType, out pieceInfo))
+                    if (boardInfo.TryGetValue(piece, out pieceInfo))
                         pieceInfo.black++;
                     // Create new PieceInfo entry in dictionary and increment the number of
                     // black pieces of the current piece type
                     else
-                        boardInfo.Add(pieceType, new PieceInfo(1, 0));
+                        boardInfo.Add(piece, new PieceInfo(1, 0));
                     break;
                 case PieceColor.White:
                     // Increment the number of white pieces of the current piece type
-                    if (boardInfo.TryGetValue(pieceType, out pieceInfo))
+                    if (boardInfo.TryGetValue(piece, out pieceInfo))
                         pieceInfo.white++;
                     // Create new PieceInfo entry in dictionary and increment the number of
                     // white pieces of the current piece type
                     else
-                        boardInfo.Add(pieceType, new PieceInfo(0, 1));
+                        boardInfo.Add(piece, new PieceInfo(0, 1));
                     break;
             }
         }

@@ -111,5 +111,29 @@ namespace SolarWinds.MSP.Chess
 				}
 			}
 		}
-	}
+        /// <summary>
+        /// This test checks if the board maintains track of the pieces in the board properly. 
+        /// </summary>
+        [TestMethod]
+        public void Has_Correct_Board_Info()
+        {
+            // Add 2 black pawns
+            Pawn firstPawnBlack = new Pawn(PieceColor.Black);
+            Pawn secondPawnBlack = new Pawn(PieceColor.Black);
+            chessBoard.Add(firstPawnBlack, 6, 3, PieceColor.Black);
+            chessBoard.Add(secondPawnBlack, 5, 3, PieceColor.Black);
+
+            // Add 3 white pawns
+            Pawn firstPawnWhite = new Pawn(PieceColor.White);
+            Pawn secondPawnWhite = new Pawn(PieceColor.White);
+            Pawn thirdPawnWhite = new Pawn(PieceColor.White);
+            chessBoard.Add(firstPawnWhite, 6, 0, PieceColor.White);
+            chessBoard.Add(secondPawnWhite, 5, 0, PieceColor.White);
+            chessBoard.Add(thirdPawnWhite, 4, 0, PieceColor.White);
+
+            // Assert
+            Assert.AreEqual(chessBoard.GetBoardInfo(firstPawnBlack.GetType().Name, PieceColor.Black), 2);
+            Assert.AreEqual(chessBoard.GetBoardInfo(firstPawnBlack.GetType().Name, PieceColor.White), 3);
+        }
+    }
 }

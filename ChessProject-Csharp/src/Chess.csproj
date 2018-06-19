@@ -49,7 +49,6 @@
     <Compile Include="Piece.cs" />
     <Compile Include="PieceColor.cs" />
     <Compile Include="PieceInfo.cs" />
-    <Compile Include="PieceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
